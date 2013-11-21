@@ -3,13 +3,14 @@ import pifacecad.tools as pifacetools
 from time import sleep
 import random
 cad = p.PiFaceCAD()
-# cad.lcd.write("Random number")
-sleep(2)
-cad.lcd.set_cursor(0,1)
-scanner = pifacetools.LCDScanf("Random number\nfrom %3i > %3i%r")
+cad.lcd.backlight_on()
+
 
 while not cad.switches[4].value:
 	cad.lcd.clear()
+	cad.lcd.write("Random number")
+	sleep(1)
+	scanner = pifacetools.LCDScanf("from %3i > %3i%r", cad)
 	randomRange = scanner.scan()
 	
 	while not cad.switches[1].value:
